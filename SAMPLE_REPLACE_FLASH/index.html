@@ -1,0 +1,141 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+	<head>
+		<title>SAMPLE.JS_REPLACE_FLASH</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+		<link type="text/css" rel="stylesheet" href="./css/base.css"/>
+
+		<script type="text/javascript" src="js/swfobject.js"></script>
+		<script type="text/javascript" src="js/CssQuery.js"></script>
+		<script type="text/javascript" src="js/com/dragmove/event/EventUtil.js"></script>
+		<script type="text/javascript" src="js/com/dragmove/util/Util.js"></script>
+		<script type="text/javascript">
+			//
+			(function() {
+				EventUtilDM.addEventListener(window, "load", initEventHanlder);
+
+				function initEventHanlder(evt) {
+					EventUtilDM.removeEventListener(window, "load", initEventHanlder);
+					init();
+				}
+
+				function setFlashContents() {
+					var flashVars = {
+						xmlPath : "flash/xml/navi.xml",
+						topNaviInfoXmlPath : "flash/xml/topNaviInfo.xml",
+						fontPath : "flash/font/RixMGoEB_AvantGardeMediumBT.swf",
+						depth1code : "1",
+						depth2code : "1",
+						depth3code : "1"
+					};
+					var params = {
+						allowScriptAccess : "always",
+						allowFullScreen : "false",
+						quality : "high",
+						wmode : "transparent"
+					};
+					var attributes = {
+						id : "subTopNaviFlash",
+						name : "subTopNavi"
+					};
+					swfobject.embedSWF("flash/SubTopNavi.swf", "subTopNaviFlash", "100%", "265", "10.0.0", "flash/expressInstall.swf", flashVars, params, attributes);
+				}
+				
+				function setContentsReplaceFlash() {
+					console.log("mobile environment. setContentsReplaceFlash");
+					
+					//remove Flash contents
+					var _subTopNaviFlashContainer = CssQuery.getSingle("#subTopNaviFlash");
+					if(_subTopNaviFlashContainer) NodeUtilDM.removeChild(_subTopNaviFlashContainer);
+					
+					//set replace contents
+					console.log("set replace contents")
+				}
+
+				function init() {
+					console.log("init");
+
+					//Mobile
+					if (BrowserUtilDM.getFlagBrowserIsMobile()) {
+						if (BrowserUtilDM.getFlagBrowserIsMobileSafari()) {
+							console.log("mobile safari"); //iPad,iPhone,iPod
+							setContentsReplaceFlash();
+							return;
+						}
+						//
+						console.log("mobile common or android browser"); //common, android mobile
+						setContentsReplaceFlash();
+						return;
+					}
+					//Desktop
+					if (BrowserUtilDM.getFlagBrowserIsIE()) {
+						var browserVersionNo = BrowserUtilDM.getBrowserIEVersion();
+						switch(browserVersionNo) {
+							case 7 :
+								//IE7
+								console.log("IE7");
+								setFlashContents();
+								break;
+
+							case 8 :
+								//IE8
+								console.log("IE8");
+								setFlashContents();
+								break;
+
+							case 9 :
+								//IE9
+								console.log("IE9");
+								setFlashContents();
+								break;
+
+							default :
+								//common
+								setFlashContents();
+								console.log("common");
+								break;
+						}
+					}
+					if (BrowserUtilDM.getFlagBrowserIsFirefox()) {//firefox
+						console.log("firefox");
+						setFlashContents();
+						return;
+					}
+					if (BrowserUtilDM.getFlagBrowserIsChrome()) {//chrome
+						console.log("chrome");
+						setFlashContents();
+						return;
+					}
+					if (BrowserUtilDM.getFlagBrowserIsSafari()) {//safari
+						console.log("safari");
+						setFlashContents();
+						return;
+					}
+					if (BrowserUtilDM.getFlagBrowserIsOpera()) {//opera
+						console.log("opera");
+						setFlashContents();
+						return;
+					}
+				}
+
+			})();
+		</script>
+
+		<script type="text/javascript">
+			function setFlashHeight(swf_id, targetHeight) {
+				if (console) {
+					console.log("setFlashHeight swf_id : ", swf_id, ", targetHeight : ", targetHeight);
+				}
+			}
+		</script>
+
+	</head>
+	<body>
+		<div id="subTopNaviFlash">
+			<h1>Alternative content</h1>
+			<p>
+				<a href="http://www.adobe.com/go/getflashplayer"><img src="http://www.adobe.com/images/shared/download_buttons/get_flash_player.gif" alt="Get Adobe Flash player" /></a>
+			</p>
+		</div>
+	</body>
+</html>

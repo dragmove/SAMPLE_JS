@@ -1,0 +1,229 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ko" xml:lang="ko">
+	<head>
+		<title>SAMPLE.JS_REPLACE_FLASH</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<link type="text/css" rel="stylesheet" href="./css/base.css"/>
+		<link type="text/css" rel="stylesheet" href="./css/index.css"/>
+
+		<script type="text/javascript" src="js/swfobject.js"></script>
+		<script type="text/javascript" src="js/CssQuery.js"></script>
+		<script type="text/javascript" src="js/com/dragmove/event/EventUtil.js"></script>
+		<script type="text/javascript" src="js/com/dragmove/util/Util.js"></script>
+		<script type="text/javascript">
+			//
+			(function() {
+				EventUtilDM.addEventListener(window, "load", initEventHanlder);
+
+				function initEventHanlder(evt) {
+					EventUtilDM.removeEventListener(window, "load", initEventHanlder);
+					init();
+				}
+
+				function init() {
+					console.log("init");
+
+					//Mobile
+					if (BrowserUtilDM.getFlagBrowserIsMobile()) {
+						if (BrowserUtilDM.getFlagBrowserIsMobileSafari()) {
+							console.log("mobile safari");
+							//iPad,iPhone,iPod
+							setInstanceMobile();
+							return;
+						}
+						//
+						console.log("mobile common or android browser");
+						//common, android mobile
+						setInstanceMobile();
+						return;
+					}
+					//Desktop
+					if (BrowserUtilDM.getFlagBrowserIsIE()) {
+						var browserVersionNo = BrowserUtilDM.getBrowserIEVersion();
+						switch(browserVersionNo) {
+							case 7 :
+								//IE7
+								console.log("IE7");
+								setInstance();
+								return;
+								break;
+
+							case 8 :
+								//IE8
+								console.log("IE8");
+								setInstance();
+								return;
+								break;
+
+							case 9 :
+								//IE9
+								console.log("IE9");
+								setInstance();
+								return;
+								break;
+
+							default :
+								//common
+								console.log("common");
+								setInstance();
+								return;
+								break;
+						}
+					}
+					if (BrowserUtilDM.getFlagBrowserIsFirefox()) {//firefox
+						console.log("firefox");
+						setInstance();
+						return;
+					}
+					if (BrowserUtilDM.getFlagBrowserIsChrome()) {//chrome
+						console.log("chrome");
+						setInstance();
+						return;
+					}
+					if (BrowserUtilDM.getFlagBrowserIsSafari()) {//safari
+						console.log("safari");
+						setInstance();
+						return;
+					}
+					if (BrowserUtilDM.getFlagBrowserIsOpera()) {//opera
+						console.log("opera");
+						setInstance();
+						return;
+					}
+				}
+
+				function setInstance() {
+					console.log("setInstance")
+				}
+
+				function setInstanceMobile() {
+					console.log("setInstanceMobile")
+				}
+				
+				function submitForm() {
+					document.getElementById('form').submit();
+				}
+				
+				function resetForm() {
+					document.getElementById('form').reset();
+				}
+			})();
+		</script>
+	</head>
+	<body>
+		<div class="container">
+			
+			<div tabindex="0">
+				div can tab focus. because, 'div' tabindex to 0.
+			</div>
+			<span tabindex="0">
+				span can tab focus. because, 'span' tabindex to 0.
+			</span>
+			<br />
+			
+			<a href="#" tabindex="1">
+				set a tag tabindex to 1.
+			</a>
+			<br />
+			
+			<a href="#">
+				a tag
+			</a>
+			<br />
+			
+			<div class="formContainer">
+				<form id="form" method="post" action="">
+					<!-- action="formSubmitActionPage.jsp" -->
+					<fieldset class="selectFieldset">
+						<legend>
+							fieldset select
+						</legend>
+						<select id="select_1" name="select_1" class="customSelect">
+							<!-- onchange="alert(this.selectedIndex);" -->
+							<option value="value_1_1">기본_1_1</option>
+							<option value="value_1_2">옵션 1</option>
+							<option value="value_1_3">옵션 2</option>
+							<option value="value_1_4">옵션 3</option>
+							<option value="value_1_5">옵션 4</option>
+							<option value="value_1_6">옵션 5</option>
+							<option value="value_1_7">옵션 6</option>
+							<option value="value_1_8">옵션 7</option>
+							<option value="value_1_9">옵션 8</option>
+							<option value="value_1_10">옵션 9</option>
+						</select>
+
+						<select id="select_2" name="select_2" class="customSelect">
+							<!-- onchange="alert(this.selectedIndex);" -->
+							<option value="value_2_1">기본_2_1</option>
+							<option value="value_2_2">옵션 1</option>
+							<option value="value_2_3">옵션 2</option>
+							<option value="value_2_4">옵션 3</option>
+							<option value="value_2_5">옵션 4</option>
+							<option value="value_2_6">옵션 5</option>
+							<option value="value_2_7">옵션 6</option>
+							<option value="value_2_8">옵션 7</option>
+							<option value="value_2_9">옵션 8</option>
+							<option value="value_2_10">옵션 9</option>
+						</select>
+					</fieldset>
+					<br />
+
+					<fieldset class="inputTextFieldset">
+						<legend>
+							fieldset inputText
+						</legend>
+						<input class="inputText" type="text" name="inputTextName_1" value="tabindex equal -1" tabindex="-1" />
+						<input class="inputTextPassword" type="password" name="passwordTextName_1" />
+					</fieldset>
+					<br />
+
+					<fieldset class="inputCheckBoxFieldset">
+						<legend>
+							fieldset inputCheckBox
+						</legend>
+						<span class="inputCheckBox">
+							<input id="checkBox_1" class="customCheckBox" type="checkbox" value="" name="" />
+							<label class="checkBoxImageLabel on" title="콘덴싱(에너지효율1등급)" for="checkBox_1" >콘덴싱
+								<br/>
+								<span>(에너지효율1등급)</span></label> </span>
+						<br/>
+						<span class="inputCheckBox">
+							<input id="checkBox_2" class="customCheckBox" type="checkbox" value="" name="" />
+							<label class="checkBoxImageLabel" title="일반" for="checkBox_2" >일반</label> </span>
+					</fieldset>
+					<br />
+
+					<fieldset class="radioButtonFieldset">
+						<legend>
+							fieldset radioButton
+						</legend>
+						<span class="inputRadioButton">
+							<input id="radioButton_1" class="customRadioButton" type="radio" value="" name="radioButtonGroup"  />
+							<label class="radioButtonImageLabel" title="66㎡(8~20평)" for="radioButton_1" >66㎡(8~20평)</label>
+							<br/>
+						</span>
+						<br/>
+						<span class="inputRadioButton">
+							<input id="radioButton_2" class="customRadioButton" type="radio" value="" name="radioButtonGroup"/>
+							<label class="radioButtonImageLabel" title="86m²(26평)" for="radioButton_2" >86m²(26평)</label> </span>
+					</fieldset>
+					<br />
+
+					<fieldset class="textAreaFieldset">
+						<legend>
+							fieldset textArea
+						</legend>
+						<textarea rows="10" cols="25" name="textArea" class="textArea">At W3Schools you will find all the Web-building tutorials you need, from basic HTML to advanced XML, SQL, ASP, and PHP.</textarea>
+					</fieldset>
+					<br />
+
+					<input type="submit" value="submitValue" name="formSubmitButton" class="formSubmitButton" onclick="javascript:submitForm();" />
+					<!-- document.getElementById('form').submit();" -->
+
+					<input type="reset" value="resetValue" name="formResetButton" class="formResetButton" onclick="javascript:resetForm();" />
+					<!-- document.getElementById('form').reset();" -->
+				</form>
+			</div>
+		</div>
+	</body>
+</html>

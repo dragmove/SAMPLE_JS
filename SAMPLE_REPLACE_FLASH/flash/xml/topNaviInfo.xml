@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!-- 
+최초 작성자 : 김현석 (dragmove@v-wonderland.com | 010.8863.2191)
+최초 작성일 : 20110413
+최종 수정일 : 
+수정 내역 :
+
+	------------------
+	# XML description
+	------------------
+	Flash 파일 중 상단 Navigation 파일에서 사용되는 xml 입니다.
+	사용자의 로그인 상태를 파악하여 Flash 내부의 버튼 상태를 변경하고,
+	Navigation이 열린 상태에서 우측에 표기되는 '관람 신청' 관련 이미지를 표기합니다.
+	
+	노드 구조는 아래와 같습니다.
+	
+	<data>
+		<session> 							- 사용자의 로그인 정보 표기 노드입니다.
+			login 속성						: 로그인 상태 여부를 나타냅니다. "true"일 경우 로그인 상태를 나타내며, "false"일 경우 로그아웃 상태를 나타낸다.
+	
+		<request>							- 내비게이션 오픈시, 우측에 표기되는 관람신청 컨텐츠 관련 노드. 
+											  이 노드가 표기되지 않을 경우, 관람 신청 컨텐츠는 표기되지 않습니다.
+			<imageURL>						- 표기 이미지 경로
+			<linkURL>						- 표기 이미지 클릭시 이동할 페이지 경로
+					target 속성 : "_blank" 	: CDATA 노드 내부에 적혀 있는 url을 새 창으로 띄웁니다.
+								 "_self"  	: CDATA 노드  내부에 적혀 있는 url을 현재 창에서 띄웁니다.
+-->
+
+<data>
+	<session login="true"></session>
+	<request>
+		<imageURL><![CDATA[flash/img/requestBanner.png]]></imageURL>
+		<linkURL target="_self"><![CDATA[/requestBanner.html]]></linkURL>
+	</request>
+</data>

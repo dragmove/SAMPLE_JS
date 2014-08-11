@@ -1,0 +1,249 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ko" xml:lang="ko">
+	<head>
+		<title>SAMPLE_TWITTER_WIDGET</title>
+		<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		
+		<!-- MOBILE SETTING -->
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="default">
+		<meta name="format-detection" content="telephone=no">
+		<link rel="apple-touch-icon" href="touch-icon-iphone.png" />
+		<link rel="apple-touch-icon" sizes="72x72" href="touch-icon-ipad.png" />
+		<link rel="apple-touch-icon" sizes="114x114" href="touch-icon-iphone-retina.png" />
+		<link rel="apple-touch-icon" sizes="144x144" href="touch-icon-ipad-retina.png" />
+		
+		<!-- CSS -->
+		<link type="text/css" rel="stylesheet" href="./css/reset.css" media="all"/>
+		<link type="text/css" rel="stylesheet" href="./css/index.css" media="screen"/>
+		<link type="text/css" rel="stylesheet" href="./css/print.css" media="print"/>
+		<!--[if lt IE 9]>
+		<script src="js/html5shiv.js"></script>
+		<![endif]-->
+		<style type="text/css">
+			body, html {
+				font-family: dotum;
+				font-size: 12px;
+			}
+			.container {
+				position: relative;
+			}
+			.twitterButton {
+				position: relative;
+				margin-top: 20px;
+			}
+			.twitterIntents {
+				position: relative;
+				margin-top: 20px;
+			}
+			#shareButtonCreatedByJS {
+				position: relative;
+				margin-top: 20px;
+			}
+			#tweetUserButtonCreatedByJS {
+				position: relative;
+				margin-top: 20px;
+			}
+			#embeddedTweetsExample {
+				position: relative;
+				margin-top: 20px;
+			}
+		</style>
+		<script type="text/javascript">
+			window.twttr = ( function(d, s, id) {
+				var t, js, fjs = d.getElementsByTagName(s)[0];
+				if(d.getElementById(id))
+					return;
+				js = d.createElement(s);
+				js.id = id;
+				js.src = "https://platform.twitter.com/widgets.js";
+				fjs.parentNode.insertBefore(js, fjs);
+				return window.twttr || ( t = {
+					_e : [],
+					ready : function(f) {
+						t._e.push(f)
+					}
+				});
+			}(document, "script", "twitter-wjs"));
+
+		</script>
+		<script type="text/javascript" data-main="js/index" src="js/require.js"></script>
+	</head>
+	<body>
+		<div class="container">
+			<div class="twitterButton">
+				김현석 010-8863-2191
+			</div>
+			
+			<div class="twitterButton">
+				<h4>url share button</h4>
+				<a href="https://twitters.com/share?url=http://google.com&text=텍스트입력창에적혀있는디폴트텍스트&hashtags=보라돌이" class="twitter-share-button" data-lang="en">Tweet</a>
+				<script>
+					! function(d, s, id) {
+						var js, fjs = d.getElementsByTagName(s)[0];
+						if(!d.getElementById(id)) {
+							js = d.createElement(s);
+							js.id = id;
+							js.src = "https://platform.twitter.com/widgets.js";
+							fjs.parentNode.insertBefore(js, fjs);
+						}
+					}(document, "script", "twitter-wjs");
+
+				</script>
+			</div>
+			<div class="twitterButton">
+				<h4>large button</h4>
+				<a href="https://twitter.com/share" class="twitter-share-button" data-related="anywhere:The Javascript API,sitestreams,twitter:The official account" data-lang="en" data-size="large" data-count="none">Tweet</a>
+				<script>
+					! function(d, s, id) {
+						var js, fjs = d.getElementsByTagName(s)[0];
+						if(!d.getElementById(id)) {
+							js = d.createElement(s);
+							js.id = id;
+							js.src = "https://platform.twitter.com/widgets.js";
+							fjs.parentNode.insertBefore(js, fjs);
+						}
+					}(document, "script", "twitter-wjs-large");
+
+				</script>
+			</div>
+			<div class="twitterButton">
+				<h4>hashtag button</h4>
+				<a href="https://twitter.com/intent/tweet?button_hashtag=TwitterStories&text=defaultDisplayTextString" class="twitter-hashtag-button" data-lang="en" data-related="jasoncosta">Tweet #TwitterStories</a>
+				<script>
+					! function(d, s, id) {
+						var js, fjs = d.getElementsByTagName(s)[0];
+						if(!d.getElementById(id)) {
+							js = d.createElement(s);
+							js.id = id;
+							js.src = "https://platform.twitter.com/widgets.js";
+							fjs.parentNode.insertBefore(js, fjs);
+						}
+					}(document, "script", "twitter-wjs-hashtag-button");
+
+				</script>
+			</div>
+			<div class="twitterButton">
+				<h4>mention button</h4>
+				<a href="https://twitter.com/intent/tweet?screen_name=twitterapi" class="twitter-mention-button" data-lang="en">Tweet to @twitterapi</a>
+				<script>
+					! function(d, s, id) {
+						var js, fjs = d.getElementsByTagName(s)[0];
+						if(!d.getElementById(id)) {
+							js = d.createElement(s);
+							js.id = id;
+							js.src = "https://platform.twitter.com/widgets.js";
+							fjs.parentNode.insertBefore(js, fjs);
+						}
+					}(document, "script", "twitter-wjs-mention-button");
+
+				</script>
+			</div>
+			<div class="twitterButton">
+				<h4>use via</h4>
+				<a href="https://twitter.com/share" class="twitter-share-button" data-via="twitterapi" data-lang="en">Tweet</a>
+				<script>
+					! function(d, s, id) {
+						var js, fjs = d.getElementsByTagName(s)[0];
+						if(!d.getElementById(id)) {
+							js = d.createElement(s);
+							js.id = id;
+							js.src = "https://platform.twitter.com/widgets.js";
+							fjs.parentNode.insertBefore(js, fjs);
+						}
+					}(document, "script", "twitter-wjs-use-via");
+
+				</script>
+			</div>
+			<div class="twitterButton">
+				<h4>use url, via</h4>
+				<a href="https://twitter.com/share" class="twitter-share-button" data-url="https://dev.twitter.com" data-via="dragmove" data-lang="en">Tweet</a>
+				<script>
+					! function(d, s, id) {
+						var js, fjs = d.getElementsByTagName(s)[0];
+						if(!d.getElementById(id)) {
+							js = d.createElement(s);
+							js.id = id;
+							js.src = "https://platform.twitter.com/widgets.js";
+							fjs.parentNode.insertBefore(js, fjs);
+						}
+					}(document, "script", "twitter-wjs-use-via-and-url");
+
+				</script>
+			</div>
+			<div class="twitterButton">
+				<h4>use url, via, related, count</h4>
+				<a href="https://twitter.com/share" class="twitter-share-button" data-url="https://dev.twitter.com/pages/tweet_button" data-via="dragmove" data-lang="en" data-related="anywhereTheJavascriptAPI" data-count="vertical">Tweet</a>
+				<script>
+					! function(d, s, id) {
+						var js, fjs = d.getElementsByTagName(s)[0];
+						if(!d.getElementById(id)) {
+							js = d.createElement(s);
+							js.id = id;
+							js.src = "https://platform.twitter.com/widgets.js";
+							fjs.parentNode.insertBefore(js, fjs);
+						}
+					}(document, "script", "twitter-wjs-use-url-via-related-count");
+
+				</script>
+			</div>
+			<div class="twitterButton">
+				<h4>iframe twitter button</h4>
+				<iframe allowtransparency="true" frameborder="0" scrolling="no" src="https://platform.twitter.com/widgets/tweet_button.html" style="width:130px; height:20px;"></iframe>
+			</div>
+			<div class="twitterButton">
+				<h4>custom designed twitter button</h4>
+				<style type="text/css" media="screen">
+					#custom-tweet-button {
+						position: relative;
+						width: 100px;
+					}
+					#custom-tweet-button a {
+						display: block;
+						padding: 2px 5px 2px 20px;
+						background: url('https://twitter.com/favicons/favicon.ico') 1px center no-repeat;
+						border: 1px solid #ccc;
+					}
+				</style>
+				<div id="custom-tweet-button">
+					<a href="https://twitter.com/share?url=https%3A%2F%2Fdev.twitter.com%2Fpages%2Ftweet-button" target="_blank">Tweet</a>
+				</div>
+			</div>
+			<div class="twitterIntents">
+				<h4>Twitter Intents - Reply, Retweet, Favorite</h4>
+				<script type="text/javascript" src="//platform.twitter.com/widgets.js"></script>
+				<p>
+					<a href="https://twitter.com/intent/tweet?in_reply_to=51113028241989632">Reply</a>
+				</p>
+				<p>
+					<a href="https://twitter.com/intent/retweet?tweet_id=51113028241989632">Retweet</a>
+				</p>
+				<p>
+					<a href="https://twitter.com/intent/favorite?tweet_id=51113028241989632">Favorite</a>
+				</p>
+				<p>
+					<a href="https://twitter.com/intent/user?screen_name=google">User</a>
+				</p>
+				<p>
+					<a href="https://twitter.com/intent/user?screen_name=google&lang=ko">User Korean Localization option setting</a>
+				</p>
+			</div>
+			<div id="shareButtonCreatedByJS">
+				<h4>Share Buttons - created by twitter javascript library</h4>
+			</div>
+			<div id="tweetUserButtonCreatedByJS">
+				<h4>Follow Buttons - created by twitter javascript library</h4>
+			</div>
+			<div id="embeddedTweetsExample">
+				<h4>Embedded Tweets Sample</h4>
+				<blockquote class="twitter-tweet">
+					<p>
+						my etherdream DAC finally arrived, for some <a href="https://twitter.com/search/%23opensource">#opensource</a><a href="https://twitter.com/search/%23openframeworks">#openframeworks</a><a href="https://twitter.com/search/%23realtime">#realtime</a><a href="https://twitter.com/search/%23interactive">#interactive</a><a href="https://twitter.com/search/%23ilda">#ilda</a><a href="https://twitter.com/search/%23laser">#laser</a> joy <a href="http://t.co/K5NL51wjU4" title="http://bit.ly/16nlyvp">bit.ly/16nlyvp</a>
+					</p>
+					&mdash; Memo Akten (@memotv) <a href="https://twitter.com/memotv/status/332986761481441280">May 10, 2013</a>
+				</blockquote>
+				<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+			</div>
+	</body>
+</html>

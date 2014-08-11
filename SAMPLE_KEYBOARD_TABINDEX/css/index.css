@@ -1,0 +1,117 @@
+@charset "utf-8";
+
+/* common */
+.hide { position:absolute; top:-10000em; left:-10000em; }
+
+/*@import url('./base.css');*/
+html { height:100%; }
+body { padding:0; margin:0; height:100%; }
+
+/* html5 */
+article, aside, canvas, details, embed, figcaption, figure, footer, header, hgroup, menu, nav, section, summary, video { display:block; }
+command, datalist, keygen, mark, meter, progress, rp, rt, ruby, time, wbr, audio { display:inline; }
+
+
+div.container {
+	position:relative;
+	padding:0;
+	margin:0;
+	border:none;
+	background-color:#fff;
+}
+
+div.container > div.formContainer {
+	position:relative;
+	left:10px;
+	top:10px;
+	width:400px;
+	padding:0;
+	margin:0;
+	border:1px solid #333;
+}
+
+#form { margin:0; padding:0; }
+
+fieldset { margin:0; padding:0; border:0; }
+fieldset.selectFieldset { margin-bottom:10px; }
+fieldset.inputTextFieldset { margin-bottom:10px; }
+fieldset.inputCheckBoxFieldset { margin-bottom:10px; }
+fieldset.radioButtonFieldset { margin-bottom:10px; }
+fieldset.textAreaFieldset { margin-bottom:10px; }
+
+legend {
+	display:block;
+	position:absolute;
+	top:0;
+	left:0;
+	width:0;
+	height:0;
+	overflow:hidden;
+	font-size:0;
+}
+
+/* select */
+select{
+	font-size:11px;
+	color:#666;
+	width:150px;
+}
+
+/* input - inputText */
+input { color:#666666; font-family:'돋움', dotum, verdana, arial, applegothic, sans-serif; font-size:11px; vertical-align:middle; }
+input.inputText { background-color:#fff; border:1px solid #999999; }
+input.inputText:focus { background-color:#fff; border:1px solid #666666; }
+
+/* input - password */
+input.inputTextPassword { background-color:#fff; border:1px solid #999999; }
+input.inputTextPassword:focus { background-color:#fff; border:1px solid #666666; }
+
+/* input - checkBox */
+span.inputCheckBox {}
+span.inputCheckBox > input.customCheckBox  { /*position:absolute; left:-999em; top:-999em; width:1px; height:1px;*/ }
+span.inputCheckBox > label { color:#666666; font-family:'돋움', dotum, verdana, arial, applegothic, sans-serif; font-size:11px; vertical-align:middle; }
+span.inputCheckBox > label.checkBoxImageLabel { background:url("../img/common/checkBox.png") no-repeat 0 0; cursor:pointer; font-size:11px; padding:4px 0 2px 21px; display:inline-block; line-height:14px;}
+span.inputCheckBox > label.checkBoxImageLabel.on { background:url("../img/common/checkBox.png") no-repeat 0 -50px; color:#f97b0b; cursor:pointer; font-size:11px; padding:4px 0 2px 21px; display:inline-block; line-height:16px;}
+
+/* input - radioButton */
+span.inputRadioButton {}
+span.inputRadioButton > input.customRadioButton {}
+span.inputRadioButton > label { color:#666666; font-family:'돋움', dotum, verdana, arial, applegothic, sans-serif; font-size:11px; vertical-align:middle; }
+span.inputRadioButton > label.radioButtonImageLabel { background:url("../img/common/radioBox.png") no-repeat 0 0; cursor:pointer; font-size:12px; padding:0 0 0 17px;}
+span.inputRadioButton > label.radioButtonImageLabel.on { background:url("../img/common/radioBox.png") no-repeat 0 -100px; cursor:pointer; font-size:12px; padding:0 0 0 17px;}
+
+/* textArea */
+textarea { color:#666666; font-family:'돋움', dotum, verdana, arial, applegothic, sans-serif; font-size:11px; vertical-align:middle; }
+textarea.textArea {
+	margin:0;
+	padding:10px;
+	background-color:#f8f8f8;
+	line-height:1.5;
+	border:1px solid #cccccc;
+}
+
+/* input - submit button */
+input.formSubmitButton {
+	margin:0;
+	padding:0;
+	width:100px;
+	height:34px;
+	border:none;
+	font-size:0;
+	text-indent:-9999px;
+	background:url(../img/common/submitBtn.gif) no-repeat 0 0; cursor:pointer;
+}
+input.formSubmitButton:hover { background-position:0 -35px; }
+
+/* input - reset button */
+input.formResetButton {
+	margin:0;
+	padding:0;
+	width:100px;
+	height:34px;
+	border:none;
+	font-size:0;
+	text-indent:-9999px;
+	background:url(../img/common/resetBtn.gif) no-repeat 0 0; cursor:pointer;
+}
+input.formResetButton:hover { background-position:0 -35px; }

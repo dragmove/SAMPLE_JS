@@ -1,0 +1,93 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ko" xml:lang="ko">
+	<head>
+		<title>SAMPLE.PLUGIN_VIDEOJS</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<link type="text/css" rel="stylesheet" href="./css/base.css"/>
+		<link type="text/css" rel="stylesheet" href="./css/index.css"/>
+		
+		<link type="text/css" rel="stylesheet" href="./css/video-js/video-js.css"/>
+		<script type="text/javascript" src="js/vendor/video-js/video.js"></script>
+		<script>
+			_V_.options.flash.swf = "./flash/video-js/video-js.swf"
+		</script>
+		<script type="text/javascript" src="js/vendor/greensock/TweenMax.min.js"></script>
+		<script type="text/javascript" src="js/jquery-1.8.3.js"></script>
+		
+		<script type="text/javascript">
+			(function($){
+				var project = {};
+				project.Model = {};
+				project.Model.contentsIndex = 1;
+				
+				//Util
+				project.util = {};
+				
+				//variables
+				var _$contents;
+				var _videoJSPlayer;
+				
+				$(document).ready(function() {
+					initialize();
+				});
+				
+				function initialize() {
+					var _$contents = $("#container");
+					setVideoPlayer();
+				}
+				
+				function setVideoPlayer() {
+					_videoJSPlayer = _V_(document.getElementById('example_video_1'))
+					
+					_videoJSPlayer.addEvent("loadstart", videoJSEventHandler);
+					_videoJSPlayer.addEvent("loadedmetadata", videoJSEventHandler);
+					_videoJSPlayer.addEvent("loadeddata", videoJSEventHandler);
+					_videoJSPlayer.addEvent("loadedalldata", videoJSEventHandler);
+					_videoJSPlayer.addEvent("play", videoJSEventHandler);
+					_videoJSPlayer.addEvent("pause", videoJSEventHandler);
+					_videoJSPlayer.addEvent("timeupdate", videoJSEventHandler);
+					_videoJSPlayer.addEvent("ended", videoJSEventHandler);
+					_videoJSPlayer.addEvent("durationchange", videoJSEventHandler);
+					_videoJSPlayer.addEvent("progress", videoJSEventHandler);
+					_videoJSPlayer.addEvent("resize", videoJSEventHandler);
+					_videoJSPlayer.addEvent("volumechange", videoJSEventHandler);
+					_videoJSPlayer.addEvent("error", videoJSEventHandler);
+					_videoJSPlayer.addEvent("fullscreenchange", videoJSEventHandler);
+					//_videoJSPlayer.removeEvent("eventName", videoJSEventHandler); //removeEventHandler
+					
+					//TEST
+					TweenMax.delayedCall(3, testVideoPlayer);
+				}
+				
+				function testVideoPlayer() {
+					_videoJSPlayer.play();
+					/*
+					video-js support function - play, pause, currentTime, duration, buffered, bufferedPercent, volume, width, height, size, requestFullScreen, cancelFullScreen,
+					*/
+				}
+				
+				function videoJSEventHandler($evt) {
+					var _videoPlayer = this;
+					switch($evt.type) {
+						case "ended" :
+							console.log("videoJSPlayer ended event")
+							//_videoPlayer.play();
+						break;
+					}
+				}
+				
+				
+			})(jQuery);
+		</script>
+	</head>
+	<body>
+		<div id="container">
+			<video id="example_video_1" class="video-js vjs-default-skin" controls preload="auto" width="640" height="264" poster="http://video-js.zencoder.com/oceans-clip.png" 
+			data-setup='{"autoplay":false, "loop":false}'>  
+			<source src="http://video-js.zencoder.com/oceans-clip.mp4" type='video/mp4' />  
+			<source src="http://video-js.zencoder.com/oceans-clip.webm" type='video/webm' />  
+			<source src="http://video-js.zencoder.com/oceans-clip.ogv" type='video/ogg' />  
+			</video>
+		</div>
+	</body>
+</html>

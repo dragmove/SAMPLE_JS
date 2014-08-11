@@ -1,0 +1,360 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!-- 
+최초 작성자 : 김현석 (dragmove@v-wonderland.com | 010.8863.2191)
+최초 작성일 : 20110404
+최종 수정일 : 
+수정 내역 :
+	-----------------------------
+	# 메뉴 관련 JAVASCRIPT 실행 방법
+	-----------------------------
+	각 <depth1>, <depth2>, <depth3> 노드의 <linkURL>은 기본적으로 클릭시 이동할 페이지 경로가 기입되어 있습니다.
+	클릭시, javascript 실행을 위해서는 아래와 같은 형식으로 필요한 javascript 함수를 기입하여 사용하시면 됩니다. 
+	
+	- 예시 1) parameter가 필요한 javascript Function의 실행 방법
+	<linkURL target="_self"><![CDATA[javascript:jsFromFlash_1('parameter_1', 'parameter_2')]]></linkURL>
+	
+	- 예시 2)	 parameter가 없는 javascript Function의 실행 방법 1
+	<linkURL target="_self"><![CDATA[javascript:jsFromFlash_2()]]></linkURL>
+	
+	- 예시 3)	 parameter가 없는 javascript Function의 실행 방법 2
+	<linkURL target="javascript"><![CDATA[jsFromFlash_2]]></linkURL>
+	
+	------------------
+	# XML description
+	------------------
+	CJ AZIT navigation 관련 정보 xml입니다.
+	<data>
+		<mainLink>				- navigation 메뉴 관련 노드
+			<depth1>			- 메뉴 정보 노드 (<depth2>, <depth3> 노드 구조 또한 <depth1> 노드와 동일합니다.)
+				<name>			- 메뉴 표기 텍스트
+				<linkURL>		- 메뉴 클릭시 이동할 페이지 경로
+					target 속성 : "_blank" : linkURL CDATA 노드 내부에 적혀 있는 url을 새 창으로 띄웁니다.
+								 "_self" : linkURL CDATA 노드  내부에 적혀 있는 url을 현재 창에서 띄웁니다.
+		
+		<customerLink>			- 고객센터 메뉴 관련 노드
+			<depth1>			- 메뉴 정보 노드 (<depth2>, <depth3> 노드 구조 또한 <depth1> 노드와 동일합니다.)
+				<name>			- 메뉴 표기 텍스트
+				<linkURL>		- 메뉴 클릭시 이동할 페이지 경로
+					target 속성 : "_blank" : linkURL CDATA 노드 내부에 적혀 있는 url을 새 창으로 띄웁니다.
+								 "_self" : linkURL CDATA 노드  내부에 적혀 있는 url을 현재 창에서 띄웁니다.
+		
+		<myPageLink>			- 마이페이지 메뉴 관련 노드
+			<depth1>			- 메뉴 정보 노드 (<depth2>, <depth3> 노드 구조 또한 <depth1> 노드와 동일합니다.)
+				<name>			- 메뉴 표기 텍스트
+				<linkURL>		- 메뉴 클릭시 이동할 페이지 경로
+					target 속성 : "_blank" : linkURL CDATA 노드 내부에 적혀 있는 url을 새 창으로 띄웁니다.
+								 "_self" : linkURL CDATA 노드  내부에 적혀 있는 url을 현재 창에서 띄웁니다.
+		
+		<loginPageLink>			- 로그인 메뉴 관련 노드
+			<depth1>			- 메뉴 정보 노드 (<depth2>, <depth3> 노드 구조 또한 <depth1> 노드와 동일합니다.)
+				<name>			- 메뉴 표기 텍스트
+				<linkURL>		- 메뉴 클릭시 이동할 페이지 경로
+					target 속성 : "_blank" : linkURL CDATA 노드 내부에 적혀 있는 url을 새 창으로 띄웁니다.
+								 "_self" : linkURL CDATA 노드  내부에 적혀 있는 url을 현재 창에서 띄웁니다.
+		
+		<utilPageLink>			- 유틸리티 메뉴 관련 노드
+			<depth1>			- 메뉴 정보 노드 (<depth2>, <depth3> 노드 구조 또한 <depth1> 노드와 동일합니다.)
+				<name>			- 메뉴 표기 텍스트
+				<linkURL>		- 메뉴 클릭시 이동할 페이지 경로
+					target 속성 : "_blank" : linkURL CDATA 노드 내부에 적혀 있는 url을 새 창으로 띄웁니다.
+								 "_self" : linkURL CDATA 노드  내부에 적혀 있는 url을 현재 창에서 띄웁니다.
+		
+		<utilLink>				- navigation 우측 상단 util 메뉴 관련 노드
+			<depth1>			- 메뉴 정보 노드 (<depth2>, <depth3> 노드 구조 또한 <depth1> 노드와 동일합니다.)
+				<name>			- 메뉴 표기 텍스트
+				<linkURL>		- 메뉴 클릭시 이동할 페이지 경로
+					target 속성 : "_blank" : linkURL CDATA 노드 내부에 적혀 있는 url을 새 창으로 띄웁니다.
+								 "_self" : linkURL CDATA 노드  내부에 적혀 있는 url을 현재 창에서 띄웁니다.
+-->
+
+<data>
+	<name><![CDATA[Home]]></name>
+	<linkURL target="_self"><![CDATA[/]]></linkURL>
+	
+	<mainLink>
+		<depth1 depth1code="1" depth2code="0" depth3code="0">
+			<name><![CDATA[CJ azit 소개]]></name>
+			<linkURL target="_self"><![CDATA[1_0_0.asp]]></linkURL>
+			
+			<depth2 depth1code="1" depth2code="1" depth3code="0">
+				<name><![CDATA[CJ azit란?]]></name>
+				<linkURL target="_self"><![CDATA[1_1_0.asp]]></linkURL>
+			</depth2>
+			
+			<depth2 depth1code="1" depth2code="2" depth3code="0">
+				<name><![CDATA[공간소개]]></name>
+				<linkURL target="_self"><![CDATA[1_2_0.asp]]></linkURL>
+			</depth2>
+			
+			<depth2 depth1code="1" depth2code="3" depth3code="0">
+				<name><![CDATA[BI소개]]></name>
+				<linkURL target="_self"><![CDATA[1_3_0.asp]]></linkURL>
+			</depth2>
+			
+			<depth2 depth1code="1" depth2code="4" depth3code="0">
+				<name><![CDATA[오시는 길]]></name>
+				<linkURL target="_self"><![CDATA[1_4_0.asp]]></linkURL>
+			</depth2>
+		</depth1>
+		
+		<depth1 depth1code="2" depth2code="0" depth3code="0">
+			<name><![CDATA[지원프로그램]]></name>
+			<linkURL target="_self"><![CDATA[2_0_0.asp]]></linkURL>
+			
+			<depth2 depth1code="2" depth2code="1" depth3code="0">
+				<name><![CDATA[음악]]></name>
+				<linkURL target="_self"><![CDATA[2_1_0.asp]]></linkURL>
+				
+				<depth3 depth1code="2" depth2code="1" depth3code="1">
+					<name><![CDATA[Tune Up 이란?]]></name>
+					<linkURL target="_self"><![CDATA[2_1_1.asp]]></linkURL>
+				</depth3>
+				
+				<depth3 depth1code="2" depth2code="1" depth3code="2">
+					<name><![CDATA[지원안내]]></name>
+					<linkURL target="_self"><![CDATA[2_1_2.asp]]></linkURL>
+				</depth3>
+				
+				<depth3 depth1code="2" depth2code="1" depth3code="3">
+					<name><![CDATA[참가작 보기]]></name>
+					<linkURL target="_self"><![CDATA[2_1_3.asp]]></linkURL>
+				</depth3>
+				
+				<depth3 depth1code="2" depth2code="1" depth3code="4">
+					<name><![CDATA[Tune Up 뮤지션]]></name>
+					<linkURL target="_self"><![CDATA[2_1_4.asp]]></linkURL>
+				</depth3>
+			</depth2>
+			
+			<depth2 depth1code="2" depth2code="2" depth3code="0">
+				<name><![CDATA[연극]]></name>
+				<linkURL target="_self"><![CDATA[2_2_0.asp]]></linkURL>
+				
+				<depth3 depth1code="2" depth2code="2" depth3code="1">
+					<name><![CDATA[Creative Minds^연극이란?]]></name>
+					<linkURL target="_self"><![CDATA[2_2_1.asp]]></linkURL>
+				</depth3>
+				
+				<depth3 depth1code="2" depth2code="2" depth3code="2">
+					<name><![CDATA[지원안내]]></name>
+					<linkURL target="_self"><![CDATA[2_2_2.asp]]></linkURL>
+				</depth3>
+				
+				<depth3 depth1code="2" depth2code="2" depth3code="3">
+					<name><![CDATA[선정작 보기]]></name>
+					<linkURL target="_self"><![CDATA[2_2_3.asp]]></linkURL>
+				</depth3>
+			</depth2>
+			
+			<depth2 depth1code="2" depth2code="3" depth3code="0">
+				<name><![CDATA[뮤지컬]]></name>
+				<linkURL target="_self"><![CDATA[2_3_0.asp]]></linkURL>
+				
+				<depth3 depth1code="2" depth2code="3" depth3code="1">
+					<name><![CDATA[Creative Minds^뮤지컬이란?]]></name>
+					<linkURL target="_self"><![CDATA[2_3_1.asp]]></linkURL>
+				</depth3>
+				
+				<depth3 depth1code="2" depth2code="3" depth3code="2">
+					<name><![CDATA[지원안내]]></name>
+					<linkURL target="_self"><![CDATA[2_3_2.asp]]></linkURL>
+				</depth3>
+				
+				<depth3 depth1code="2" depth2code="3" depth3code="3">
+					<name><![CDATA[선정작 보기]]></name>
+					<linkURL target="_self"><![CDATA[2_3_3.asp]]></linkURL>
+				</depth3>
+			</depth2>
+			
+			<depth2 depth1code="2" depth2code="4" depth3code="0">
+				<name><![CDATA[영화]]></name>
+				<linkURL target="_self"><![CDATA[2_4_0.asp]]></linkURL>
+				
+				<depth3 depth1code="2" depth2code="4" depth3code="1">
+					<name><![CDATA[Project S란?]]></name>
+					<linkURL target="_self"><![CDATA[2_4_1.asp]]></linkURL>
+				</depth3>
+				
+				<depth3 depth1code="2" depth2code="4" depth3code="2">
+					<name><![CDATA[지원안내]]></name>
+					<linkURL target="_self"><![CDATA[2_4_2.asp]]></linkURL>
+				</depth3>
+				
+				<depth3 depth1code="2" depth2code="4" depth3code="3">
+					<name><![CDATA[선정작 보기]]></name>
+					<linkURL target="_self"><![CDATA[2_4_3.asp]]></linkURL>
+				</depth3>
+			</depth2>
+		</depth1>
+		
+		<depth1 depth1code="3" depth2code="0" depth3code="0">
+			<name><![CDATA[아지트 소식]]></name>
+			<linkURL target="_self"><![CDATA[3_0_0.asp]]></linkURL>
+			
+			<depth2 depth1code="3" depth2code="1" depth3code="0">
+				<name><![CDATA[공지사항]]></name>
+				<linkURL target="_self"><![CDATA[3_1_0.asp]]></linkURL>
+			</depth2>
+			
+			<depth2 depth1code="3" depth2code="2" depth3code="0">
+				<name><![CDATA[관람신청]]></name>
+				<linkURL target="_self"><![CDATA[3_2_0.asp]]></linkURL>
+			</depth2>
+			
+			<depth2 depth1code="3" depth2code="3" depth3code="0">
+				<name><![CDATA[아지트 스토리]]></name>
+				<linkURL target="_self"><![CDATA[3_3_0.asp]]></linkURL>
+			</depth2>
+			
+			<depth2 depth1code="3" depth2code="4" depth3code="0">
+				<name><![CDATA[아지트 뉴스]]></name>
+				<linkURL target="_self"><![CDATA[3_4_0.asp]]></linkURL>
+			</depth2>
+			
+			<depth2 depth1code="3" depth2code="5" depth3code="0">
+				<name><![CDATA[아지트 뉴스레터]]></name>
+				<linkURL target="_self"><![CDATA[3_5_0.asp]]></linkURL>
+			</depth2>
+		</depth1>
+	</mainLink>
+	
+	<customerLink>
+		<depth1 depth1code="4" depth2code="0" depth3code="0">
+			<name><![CDATA[고객센터]]></name>
+			<linkURL target="_self"><![CDATA[4_0_0.asp]]></linkURL>
+			
+			<depth2 depth1code="4" depth2code="1" depth3code="0">
+				<name><![CDATA[FAQ]]></name>
+				<linkURL target="_self"><![CDATA[4_1_0.asp]]></linkURL>
+			</depth2>
+			
+			<depth2 depth1code="4" depth2code="2" depth3code="0">
+				<name><![CDATA[문의하기]]></name>
+				<linkURL target="_self"><![CDATA[4_2_0.asp]]></linkURL>
+			</depth2>
+			
+			<depth2 depth1code="4" depth2code="3" depth3code="0">
+				<name><![CDATA[사이트맵]]></name>
+				<linkURL target="_self"><![CDATA[4_3_0.asp]]></linkURL>
+			</depth2>
+		</depth1>
+	</customerLink>
+	
+	<myPageLink>
+		<depth1 depth1code="5" depth2code="0" depth3code="0">
+			<name><![CDATA[마이페이지]]></name>
+			<linkURL target="_self"><![CDATA[7_0_0.asp]]></linkURL>
+			
+			<depth2 depth1code="5" depth2code="1" depth3code="0">
+				<name><![CDATA[나의 작품 및 지원안내]]></name>
+				<linkURL target="_self"><![CDATA[5_1_0.asp]]></linkURL>
+			</depth2>
+			
+			<depth2 depth1code="5" depth2code="2" depth3code="0">
+				<name><![CDATA[신청확인/취소]]></name>
+				<linkURL target="_self"><![CDATA[5_2_0.asp]]></linkURL>
+			</depth2>
+			
+			<depth2 depth1code="5" depth2code="3" depth3code="0">
+				<name><![CDATA[문의내역 확인]]></name>
+				<linkURL target="_self"><![CDATA[5_3_0.asp]]></linkURL>
+			</depth2>
+			
+			<depth2 depth1code="5" depth2code="4" depth3code="0">
+				<name><![CDATA[회원정보 및 수정]]></name>
+				<linkURL target="_self"><![CDATA[5_4_0.asp]]></linkURL>
+			</depth2>
+			
+			<depth2 depth1code="5" depth2code="5" depth3code="0">
+				<name><![CDATA[비밀번호 수정]]></name>
+				<linkURL target="_self"><![CDATA[5_5_0.asp]]></linkURL>
+			</depth2>
+		</depth1>
+	</myPageLink>
+	
+	<loginPageLink>
+		<depth1 depth1code="6" depth2code="0" depth3code="0">
+			<name><![CDATA[로그인]]></name>
+			<linkURL target="_self"><![CDATA[6_0_0.asp]]></linkURL>
+			
+			<depth2 depth1code="6" depth2code="1" depth3code="0">
+				<name><![CDATA[회원가입]]></name>
+				<linkURL target="_self"><![CDATA[6_1_0.asp]]></linkURL>
+			</depth2>
+			
+			<depth2 depth1code="6" depth2code="2" depth3code="0">
+				<name><![CDATA[아이디/비밀번호 찾기]]></name>
+				<linkURL target="_self"><![CDATA[6_2_0.asp]]></linkURL>
+			</depth2>
+		</depth1>
+	</loginPageLink>
+	
+	<utilPageLink>
+		<depth1 depth1code="8" depth2code="0" depth3code="0">
+			<name><![CDATA[유틸리티]]></name>
+			<linkURL target="_self"><![CDATA[8_0_0.asp]]></linkURL>
+			
+			<depth2 depth1code="8" depth2code="1" depth3code="0">
+				<name><![CDATA[개인정보취급방침]]></name>
+				<linkURL target="_self"><![CDATA[8_1_0.asp]]></linkURL>
+			</depth2>
+			
+			<depth2 depth1code="8" depth2code="2" depth3code="0">
+				<name><![CDATA[이용약관]]></name>
+				<linkURL target="_self"><![CDATA[8_2_0.asp]]></linkURL>
+			</depth2>
+			
+			<depth2 depth1code="8" depth2code="3" depth3code="0">
+				<name><![CDATA[azit RSS]]></name>
+				<linkURL target="_self"><![CDATA[8_3_0.asp]]></linkURL>
+			</depth2>
+		</depth1>
+	</utilPageLink>
+	
+	<utilLink>
+		<logout>
+			<depth1 depth1code="0" depth2code="0" depth3code="0">
+				<name><![CDATA[Login]]></name>
+				<linkURL target="_self"><![CDATA[login.asp]]></linkURL>
+			</depth1>
+			
+			<depth1 depth1code="0" depth2code="0" depth3code="0">
+				<name><![CDATA[Join Us]]></name>
+				<linkURL target="_self"><![CDATA[joinUs.asp]]></linkURL>
+			</depth1>
+			
+			<depth1 depth1code="0" depth2code="0" depth3code="0">
+				<name><![CDATA[FAQ]]></name>
+				<linkURL target="_self"><![CDATA[faq.asp]]></linkURL>
+			</depth1>
+			
+			<depth1 depth1code="0" depth2code="0" depth3code="0">
+				<name><![CDATA[Sitemap]]></name>
+				<linkURL target="_self"><![CDATA[sitemap.asp]]></linkURL>
+			</depth1>
+		</logout>
+		
+		<login>
+			<depth1 depth1code="0" depth2code="0" depth3code="0">
+				<name><![CDATA[Logout]]></name>
+				<linkURL target="_self"><![CDATA[logout.asp]]></linkURL>
+			</depth1>
+			
+			<depth1 depth1code="0" depth2code="0" depth3code="0">
+				<name><![CDATA[My Page]]></name>
+				<linkURL target="_self"><![CDATA[myPage.asp]]></linkURL>
+			</depth1>
+			
+			<depth1 depth1code="0" depth2code="0" depth3code="0">
+				<name><![CDATA[FAQ]]></name>
+				<linkURL target="_self"><![CDATA[faq.asp]]></linkURL>
+			</depth1>
+			
+			<depth1 depth1code="0" depth2code="0" depth3code="0">
+				<name><![CDATA[Sitemap]]></name>
+				<linkURL target="_self"><![CDATA[sitemap.asp]]></linkURL>
+			</depth1>
+		</login>
+	</utilLink>
+</data>

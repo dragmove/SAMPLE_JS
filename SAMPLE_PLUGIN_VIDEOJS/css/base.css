@@ -1,0 +1,39 @@
+@charset "utf-8";
+
+/* common */
+html,
+body { height:100%; margin:0; padding:0; }
+body { margin:0; padding:0; color:#666; font-style:normal; font-size:12px; font-family:'돋움', dotum, verdana, arial, applegothic, sans-serif; line-height:1.5;  }
+html { overflow-y:scroll; }
+
+div, ul, ol, li, dl, dt, dd, form, fieldset, input, button, p, h1, h2, h3, h4, h5, h6, blockquote, iframe, th, td { margin:0; padding:0; }
+img { border:0; }
+li { list-style:none; }
+button { background:transparent; cursor:pointer; vertical-align:middle; margin:0; }
+
+/* font */
+i, em, u, cite { font-style:normal; }
+ 
+/* link */
+a { color:#666; font-family:'돋움', dotum, verdana, arial, applegothic, sans-serif; font-size:12px; text-decoration:none; }
+a:hover { text-decoration:underline; }
+
+/* table */
+table { table-layout:fixed; border-collapse:collapse; border-spacing:0; width:100%; }
+th,
+td { border-collapse:collapse; }
+legend, caption, hr { display:none; }
+
+/* form */
+form { display:inline; }
+select, input, textarea { color:#666; font-family:'돋움', dotum, verdana, arial, applegothic, sans-serif; font-size:inherit; vertical-align:middle; }
+fieldset, blockquote, iframe, button { border:none; }
+fieldset { display:inline; }
+.input_txt { height:19px; padding:1px 0 0 3px; font:12px/18px '돋움',Dotum; background:#fff; border-top:1px solid #a7a7a7; border-right:1px solid #d7d7d7; border-bottom:1px solid #e5e5e5; border-left:1px solid #878787; }
+.input_file { height:22px; font:12px/18px '돋움',Dotum; color:#666; background:#fff; border-top:1px solid #a7a7a7; border-right:1px solid #d7d7d7; border-bottom:1px solid #e5e5e5; border-left:1px solid #878787; }
+.input_textarea { padding:3px; font:12px/18px '돋움',Dotum; color:#666; background:#fff; border-top:1px solid #a7a7a7; border-right:1px solid #d7d7d7; border-bottom:1px solid #e5e5e5; border-left:1px solid #878787; overflow:auto; overflow-x:hidden; }
+
+/* clear */
+.f_clear:after { content:" "; height:0; display:block; visibility:hidden; clear:both; }
+* html .f_clear { height:1%; }
+.f_clear { display:block; min-height:1%; }
