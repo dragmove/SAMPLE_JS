@@ -1,0 +1,455 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ko" xml:lang="ko">
+<html>
+	<head>
+		<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
+		<title>Test Facebook Canvas Page</title>
+		
+		<link type="text/css" rel="stylesheet" href="css/index.css" />
+		<script>
+			//------------------------
+			//FACEBOOK GRAPH API TEST
+			//------------------------
+			/*
+			20120525
+
+			+ Facebook
+
+			1. facebook 접속
+			하단부 메뉴 중 '개발자' 선택 -> http://developers.facebook.com/?ref=pf 페이지로 이동
+
+			https://developers.facebook.com/docs/guides/web/ 참고
+
+			2. app 생성
+			테스트를 위한 GraphAPITest 라는 이름의 app 생성.
+			App ID/API키 : 	149325035201155
+			App Secret : 	a1cf22373624e191da6567bb882f5c5b
+			
+			Display Name, Namespace, 연락 이메일 입력
+			(app 생성 후, https://developers.facebook.com/apps/149325035201155/summary?web_hosting=1 페이지에서 app의 정보 설정 가능)
+			
+			App Domains : Hosting URL 관련 설정시, 자동으로 입력되었음.
+			카테고리 : 일단, Apps for Pages 로 설정하였음.
+			
+			Hosting URL : heroku라는 회사에서 free hosting 서비스를 지원하여 이를 통해 생성 후,
+			https://stormy-meadow-7686.herokuapp.com/ 이라는 Hosting URL을 부여받음.
+			하단의 Website with Facebook Login, Facebook 캔버스 앱, 페이지 탭 사항에 정보가 자동입력되었음.
+
+
+			3. Website에서의 사용법
+			https://developers.facebook.com/docs/guides/web/
+
+			- 사용가능한 facebook Social Plugin
+			Like Button, Send Button, subscribe Button, Comments, Activity Feed, recommendations, Like Box, Login Button, Registration, Facepile, Live Stream 존재.
+
+			이 문서는 PHP, HTML/Javascript 사용을 통한 가이드이다.
+
+				- 1. Like Button TEST 성공
+				- 2. Activity Feed Plugin(최근 활동) TEST
+					Domain : stormy-meadow-7686.herokuapp.com/
+					App ID : 149325035201155
+					Action : like (다른 어떤 Action을 적을 수 있는지 잘 모르겠음)
+					
+					입력 후 하단의 Get Code 버튼 클릭시, HTML5, XFBML, IFRAME 내부 Activity Feed Plugin 관련 코드가 표기된다.
+					여기서는 HTML5 코드로 진행.
+
+					Graph Javascript SDK를 html 문서에 삽입 후, <body> 태그 뒤에 상단의 코드를 넣어야 한다.
+					하단의 코드는 html 페이지에 표기할 위치에 삽입한다.
+
+			여기서 GraphAPI를 이용하기 위해,
+			https://developers.facebook.com/docs/reference/api/ 페이지에 접속하여
+			app의 id에 해당하는 json 정보를 http://graph.facebook.com/149325035201155 에서 살펴볼 수 있었다.
+
+			'http://graph.facebook.com/id로서의 username' 주소로도 접속하는 것이 가능하다고 하는데,
+			http://graph.facebook.com/149325035201155 에서 볼 수 있는 json 정보에서는 username 항목이 존재하지 않았다.
+			어딘가에서 따로 설정해줘야 하는 것 같다.
+
+			Facebook API에서는 user간의 관계(like, books, notes, albums 등등)를 'connections' 라고 부르는데,
+			https://graph.facebook.com/ID/CONNECTION_TYPE 페이지에서 이를 살펴볼 수 있다.
+
+			예시)
+			- Freinds
+			https://graph.facebook.com/me/friends?access_token=AAAAAAITEghMBAKGbkjDLRMFR9ptF02ePodpcdivJdzR9ZBFO8EIIsx6ZBdu5e0ji5o4nZATseo5M4BNl7leZA6YX8goriZBNUepMLuLu7ZA0I2hlBp7Ekg
+
+			- Groups
+			https://graph.facebook.com/me/groups?access_token=AAAAAAITEghMBAMAAtugNZBgtPlmjEK02HCFmx8sF7HQT8VuV7E16gXDOJrhicd9HitjZClmTTmUFU7nVyeOBAzPVIJjJ11PaMlPE4oQ2ivdQfG0gPe
+			
+			--------------------------------
+			+ Authorization (인증, https://developers.facebook.com/docs/authentication/)
+			--------------------------------
+			- Core Concepts > Authentication 메뉴
+
+			Grpah API로 간단히 public information을 취득할 수 있다.
+			예를 들어, https://graph.facebook.com/dragmove 로 접속하게 되면 내 정보를 볼 수 있다.
+
+			추가적인 정보를 user로부터 얻기 위해서는, 반드시 권한을 얻어야 한다.
+			이것을 Facebook에서는 access token을 얻는다고 하는 것이다.
+
+			예시)
+			https://graph.facebook.com/btaylor?access_token=AAAAAAITEghMBAMAAtugNZBgtPlmjEK02HCFmx8sF7HQT8VuV7E16gXDOJrhicd9HitjZClmTTmUFU7nVyeOBAzPVIJjJ11PaMlPE4oQ2ivdQfG0gPe
+			
+			Graph API는 Authorization에 OAuth 2.0을 사용한다.
+			어떻게 access token을 얻고 권한을 요청하는지
+			Facebook's OAuth 2.0 implementaions의 자세한 내용이 표기되어 있는 authentication guide에서 살펴볼 수 있다.
+			
+			https://developers.facebook.com/docs/authentication/ 접속!!!
+
+			Authentication 에도 7가지 종류가 있다.
+			Authentication in native Android apps
+			Authentication in native iOS apps
+			Authentication within a Page Tab on www.facebook.com
+			Authentication within a Canvas Page on apps.facebook.com
+			Authentication for Websites & Mobile Web apps using Javascript (client-side flow) - 지금 살펴볼 것은 요거다!!!
+			Authentication for Websites & Mobile Web apps using a Server (server-side flow)
+			Authentication for devices without access to a browser
+
+			user 액세스 토큰을 얻는데서, App access token과 Page access token을 얻는 것이 가능하다.
+			
+			--------------------------------
+			+ Permissions (허가)
+			--------------------------------
+			당신의 어플리케이션을 허가할 때, user는 단지 당신의 app에 그들의 basic information(https://developers.facebook.com/docs/authentication/permissions/#basic_info)을 허가한다.
+			당신이 추가적인 data를 읽거나 써야 할 경우, 당신은 추가적인 permission(https://developers.facebook.com/docs/authentication/permissions/)을 요청할 필요가 있다.
+
+			당신이 요청할 수 있는 추가적인 permission을 확인하거나, 그들이 당신에게 제공하는 access를 확인하기 위해서는
+			Permissions reference(https://developers.facebook.com/docs/authentication/permissions/)를 참조하라.
+
+			HTTP GET을 수행함으로서 user가 당신의 application에 승인한 어떠한 권한을 프로그래밍적으로 체크하는 것이 가능하다.
+			https://graph.facebook.com/me/permissions?access_token=USER_ACCESS_TOKEN
+
+			이전에 승인한 어떠한 권한을 프로그래밍적으로 삭제하는 것 또한 가능하다.
+			https://graph.facebook.com/me/permissions/PERMISSION_NAME?access_token=USER_ACCESS_TOKEN
+
+			+ Access Token Validity & Expiration
+			Facebook으로부터 access token을 얻었을 때, access token에는 유효기간이 존재한다.
+			일정 기간 이후에는 새로운 access token을 얻어야 한다.
+
+			Handle Invalid and Expired access tokens 에 대해 알고 싶다면 아래 주소 참고.
+			https://developers.facebook.com/docs/authentication/access-token-expiration/
+
+			+ Application de-authorization
+			user가 당신의 app을 지울 경우에 대한 내용. 참고.
+
+			+ Logging the user out of Facebook
+
+			+ Windows, OS X and Linux native apps
+			.NET, AIR, Cocoa 등에서의 이용.
+
+			---------------------------------
+			+ Javascript SDK
+			---------------------------------
+			App ID는 당신의 app 사이트를 위한 하나뿐인 식별자이다.
+			다음 예시는 당신이 가진 app Id로 Javascript SDK를 load하는 방법을 보여준다.
+
+			https://developers.facebook.com/docs/guides/web/ 페이지의 Authentication 부분.
+
+			당신의 app site에 user가 로그인하기 위해서는 3가지가 필요하다.
+			1. Facebook은 user에게 인증을 필요로 한다.
+			2. Facebook은 당신의 app site에 인증을 필요로 한다.
+			3. user는 자신의 information을 제공하는 것을 허용해야 한다.
+
+
+			example)
+			처음부터 새롭게 시작.
+			testFBGraphApi 라는 이름의 app을 생성.
+
+			DisplayName : testFBGraphApi
+			Namespace : test_fb_graph_api
+			연락 이메일 : shoutthief@naver.com
+
+			앱 ID/API 키 : 303798783041433
+			앱 네임스페이스 : test_fb_graph_api
+			앱 시크릿코드 : 4169004f7e319a437fb031d2556d99cc (다른 사람에게 알리지 말 것)
+
+			- Facebook 캔버스 앱
+				캔버스 URL : http://dragmove.com/test/testJS_facebook_20120525/
+				(http://dragmove.com/test/testJS_facebook_20120525/ 페이지는 testFBGraphAPI 앱 페이지의 좌측에 들어갈 html 코딩 페이지.)
+
+				캔버스 페이지 : http://apps.facebook.com/test_fb_graph_api (자동 생성된다.)
+
+			- 페이지 탭
+				페이지 탭 이름 : test FB Graph API Page tab
+				페이지 탭 URL : http://dragmove.com/test/testJS_facebook_20120525/
+
+			모든 정보 입력 후,
+			https://www.facebook.com/dialog/pagetab?app_id=YOUR_APP_ID&display=popup&next=YOUR_URL 에 접속한다.
+			YOUR_APP_ID는 '앱 ID/API 키', 
+			YOUR_URL은 반드시 앱 설정에서 정의된 URL이어야 한다. canvas app이던 무엇이던.
+			결과적으로 http://dragmove.com/test/testJS_facebook_20120525/ 이나, http://www.facebook.com이 가능하다고 한다.
+			canvas 앱을 삭제하지 않았다면, http://apps.facebook.com/_graphapi 도 가능하다고 한다.
+
+			https://graph.facebook.com/303798783041433 으로 접속하여 해당 app의 Object 정보를 볼 수 있다.
+
+			
+			https://www.facebook.com/dialog/pagetab?app_id=152814414843338&display=popup&next=http://apps.facebook.com/_graphapi
+			주소로 접속해보니, 해당 app page로 링크되는 것으로 보인다.
+			*/
+
+			(function(d){
+				var js, id = 'facebook-jssdk', ref = d.getElementsByTagName('script')[0];
+				if (d.getElementById(id)) {return;}
+				js = d.createElement('script'); js.id = id; js.async = true;
+				js.src = "//connect.facebook.net/en_US/all.js";
+				ref.parentNode.insertBefore(js, ref);
+			}(document));
+
+			window.fbAsyncInit = function() {
+				var userIdStr;
+				var accessTokenStr;
+
+				console.log('init');
+
+				//----------
+				//FB.init(parameter Object); - html 페이지에 Facebook api javascript File이 load되면, FB.init(); 함수를 실행하여 API 세팅.
+				//parameter는 appId, cookie, logging, status, xfbml, channelUrl, authResponse, frictionlessRequests, hideFlashCallback 존재.
+				//참고 - https://developers.facebook.com/docs/reference/javascript/FB.init/
+				//----------
+				FB.init({
+					appId      : '303798783041433', //app id
+					status     : true, //check login status
+					cookie     : true, //enable cookies to allow the server to access the session
+					xfbml      : true, //parse XFBML
+					oauth      : true //enable OAuth 2.0
+					//channelUrl : channel file url,
+				});
+				
+				//----------
+				//FB.Event - session의 변화를 탐지하기 위해, FB.Event를 사용할 수 있다.
+				//----------
+				FB.Event.subscribe('auth.login', function(response) {
+					console.log('FB.Event - auth.login');
+				});
+				FB.Event.subscribe('auth.logout', function(response) {
+					console.log('FB.Event - auth.logout');
+				});
+				FB.Event.subscribe('auth.authResponseChange', function(response) {
+					console.log('FB.Event - auth.authResponseChange');
+				});
+				FB.Event.subscribe('auth.statusChange', function(response) {
+					console.log('FB.Event - auth.statusChange');
+				});
+
+				//------------------
+				//FB.getLoginStatus(callbackFunction, flag_reload the login status);
+				//user가 facebook에 login되어 있는지, 당신의 app에 인증되어 있는지의 정보를 취득한다.
+				//user의 상태는 3가지가 있다.
+				//1. user가 facebook에 로그인되어 있고, 당신의 app에 인증되어 있다. (connected)
+				//2. user가 facebook에 로그인되어 있고, 당신의 app에 인증되어 있지 않다. (not_authorized)
+				//3. user가 지금 facebook에 로그인되어 있지 않고, 때문에 당신의 app에 인증되어 있는지 알 수 없다. (unknown)
+				
+				/*
+				반환되는 response Object는 
+				{
+					status: 'connected',
+					authResponse: {
+						accessToken: '...',
+						expiresIn:'...',
+						signedRequest:'...',
+						userID:'...'
+					}
+				} 의 형태를 가진다.
+				response Object의 가장 유용한 부분은 userID와 accessToken 부분이다.
+				
+				accessToken으로 user의 동의 위에 Facebook API로의 request를 가능케 한다.
+				userID는 당신의 app에서의 현재 user가 누구인지를 나타내는 특별한 식별자이다.
+				*/
+
+				//------------------
+				FB.getLoginStatus(function(response) {
+					if (response.status === 'connected') {
+						// the user is logged in and has authenticated your
+						// app, and response.authResponse supplies
+						// the user's ID, a valid access token, a signed
+						// request, and the time the access token 
+						// and signed request each expire
+						var uid = response.authResponse.userID;
+						var accessToken = response.authResponse.accessToken;
+
+						console.log('FB.getLoginStatus() uid : ' + uid);
+						console.log('FB.getLoginStatus() accessToken : ' + accessToken);
+
+						userIdStr = uid;
+						accessTokenStr = accessToken;
+						
+
+					} else if (response.status === 'not_authorized') {
+						// the user is logged in to Facebook, 
+						// but has not authenticated your app
+						console.log('FB.getLoginStatus() not_authorized : ' + response);
+					} else {
+						// the user isn't logged in to Facebook.
+						console.log('FB.getLoginStatus() unknown : ' + response);
+					}
+				}, true);
+				
+				//----------
+				//FB.login
+				//----------
+				//FB.init 이후, 303798783041433 app에 접속하기. login popup이 띄워진 후, 로그인 정보(email, password) 입력 후, 입력 창이 닫히면서, callback function 실행
+				
+				/* 
+				//Permission
+				FB.login(function(response) {
+					//handle the response
+				}, {scope: 'email,user_likes'}); //scope 변수는 comma(,)로 구분하여 다양한 permission(User and Friend Permission, Extended Permissions, Open Graph Permissions, Page Permissions) 요청을 할 수 있다. 예시에서는 email, user_likes에 관한 permission만 가져왔음. 참고 - https://developers.facebook.com/docs/authentication/permissions/			
+				*/
+
+				//FB.login 함수를 출력하는 것은, OAuth Dialog를 사용하는 당신의 app에 user가 인증하게 합니다.
+				//기본 사용법 - FB.login(callback함수,permision 관련 option Object);
+				//참고 - https://developers.facebook.com/docs/reference/javascript/FB.login/
+				FB.login(function(response) {
+					if (response.authResponse) {
+						console.log('Welcome!  Fetching your information.... ');
+					
+						FB.api('/platform', function(response) { //Facebook Platform Page Object를 얻습니다.
+							console.log(response.company_overview);
+						});
+						
+						//user의 login이 완료되면, 당신의 app이 user Object를 사용할 수 있다. 
+						FB.api('/me', function(response) {
+							console.log('response.name : ' + response.name);
+							console.log('Good to see you, ' + response.name + '.');
+						});
+
+						FB.api('/me/feed', 'get', {limit:2}, function(response) {
+							console.log('/me/feed name : ' + response.data[1].message);
+						});
+						
+						//----------
+						//FB.ui - Facebook Dialog API를 사용하여, user에게 feed, add a friend, payment, send an application request to a friend, to share a link 등의 동작 가능.
+						//참고 - https://developers.facebook.com/docs/reference/javascript/FB.ui/
+						//----------
+						FB.ui(
+						{
+							method: 'feed',
+							name: 'Facebook Dialogs',
+							link: 'https://developers.facebook.com/docs/reference/dialogs/',
+							picture: 'http://fbrell.com/f8.jpg',
+							caption: 'Reference Documentation',
+							description: 'Dialogs provide a simple, consistent interface for applications to interface with users.'
+						}, function(response) {
+							if (response && response.post_id) {
+								console.log('Post was published.');
+								console.log(response);
+							} else {
+								console.log('Post was not published.');
+							}
+						}
+						);
+					} else {
+						console.log('User cancelled login or did not fully authorize.');
+					}
+				}, {scope: 'publish_stream'}); //scope 변수에 원하는 permission 관련 String을 comma(,) 구분하여 기술
+
+				//----------
+				//FB.logout - facebook으로부터 logout하게 합니다.
+				//----------
+				/*
+				FB.logout(function(response) {
+					//user is now logged out
+				});
+				*/
+				
+				//----------
+				//FB.api - FB.api(path, method, params, callbackFunction); //참고 - https://developers.facebook.com/docs/reference/javascript/FB.api/
+				//----------
+				/*	
+				//기본 예시)
+				FB.api('/platform', function(response) { //Facebook Platform Page Object를 얻습니다.
+					//alert(response.company_overview);
+				});
+
+				FB.api('/me', function(response) { //인증된 user라면, User Object를 얻습니다. -> 인증되지 않았을 경우, undefined 출력.
+					alert(response.name);
+				});
+
+				//1st parameter - path	
+				1번째 parameter인 path는
+				http://developers.facebook.com/docs/reference/api/ 참고.
+				/me/friends
+				/me/home
+				/me/feed
+				/me/likes
+				/me/movies
+				/me/music
+				/me/books
+				/me/notes
+				/me/permissions
+				/me/photos
+				/me/albums
+				/me/videos
+				/me/videos/uploaded
+				/me/events
+				/me/groups
+				/me/checkins
+				/me/locations
+
+				https://graph.facebook.com/ID/CONNECTION_TYPE?access_token=... 으로 검색해보면,
+				반환하는 response Object에 어떤 변수가 들어 있는지 체크할 수 있다.
+				
+				- 예시)
+				facebook에 개발자 id로 로그인한 상태에서,
+				http://developers.facebook.com/tools/explorer 페이지 접속 후,
+				우측의 '연결 사항' 항목(accounts, activities, addaccounts, albums, ......) 중 feed를
+				클릭해보면, 좌측에 response Object가 json 데이터 형태로 줄줄이 나오게 된다.
+
+				http://developers.facebook.com/docs/reference/api/ 페이지의 좌측 하단의 Objects 카테고리에는
+				이러한 json 데이터의 변수들이 어떻게 담겨 있는지 테이블로 볼 수 있다.
+				
+				javascript 함수 중 FB.login()을 통해, user에게 app에서의 접근을 허용하는 것이 성공하면
+				별도의 이후의 access token의 사용없이 
+				FB.api의 아래와 같은 명령어를 이용하여 이 response Object를 받아올 수 있는 것으로 추정되며,
+				response Object의 data, paging 변수를 참고하여 아래 데이터를 추출하여 표기할 수 있었다.
+
+				FB.api('/me/feed', function(response) {
+					console.log('/me/feed name : ' + response.data[1].message);
+				});
+
+				//2nd parameter method
+				method는 'get', 'post', 'delete'가 존재한다.
+				기본적으로 get이 설정되어 있다. 'post'를 사용하여 글을 등록하고, 'delete'를 사용하여 지운다.
+
+				//+ WRITE POST BY APP
+				//당신의 app이 'publish_stream' 인증된 사용자 정보를 가지고 있고, 그들의 feed에 story를 publish하기 원한다면,
+				/*
+				var body = 'Test publish Facebook message by App. Reading JS SDK documentation';
+				FB.api('/me/feed', 'post', { message: body }, function(response) {
+					if (!response || response.error) {
+						console.log('Error occured');
+					} else {
+						console.log('Post ID: ' + response.id); //등록된 게시물의 id는 100003943811215_105372882937505 였음.
+					}
+				});
+				
+				//+ DELETE POST BY APP
+				FB.api('100003943811215_105372882937505', 'delete', function(response) {
+					if (!response || response.error) {
+						console.log('Error occured');
+					} else {
+						console.log('delete Post ID: ' + response.id);
+					}
+				});
+
+				//3rd paramter params
+				the parameters for the query 라고 정의되어 있는데,
+				http://developers.facebook.com/docs/reference/api/ 페이지에서 'query'라는 단어로 검색해보면,
+				꽤 많은 query 관련 단어들로 검색 조건을 변경할 수 있는 것으로 보인다.
+				대표적인 예는 {limit:3} 과 같은 형식으로 게시물을 3개까지만 표시한다던가 할 수 있다.
+				*/
+
+				
+				
+			};
+		</script>
+	</head>
+	<body>
+		<div id="fb-root"></div> <!-- fb-root element는 당신의 app ID와 관련된 SDK를 초기화하기 위한 FB.init()을 실행하고 로드하기 위해 필요하다. -->
+		<div id="container">
+			<iframe src="https://www.facebook.com/plugins/like.php?href=http://apps.facebook.com/test_fb_graph_api/" scrolling="no" frameborder="0" style="border:none; width:450px; height:80px"></iframe>
+
+		<fb:like send="true" width="450" show_faces="true" />
+		</div>
+	</body>
+</html>
